@@ -25,53 +25,53 @@ The goals / steps of this project are the following:
 
 Since the lane lines consist of one white line and one yellow line. My first step is to detect those 2 lines at the same time
 
-1- I converted the image into different color space to find the best result:
+**1-** I converted the image into different color space to find the best result:
 
 ![alt text][image1]
 
-![alt text][image1]
+![alt text][image2]
 
-![alt text][image1]
+![alt text][image3]
 
-![alt text][image1]
+![alt text][image4]
 
 I am happy with RGB and HLS
 
-2- I converted the image to Grayscale then 
+**2-** I converted the image to Grayscale then 
 
 - gaussian_blur: kernel size = 3
 
 - canny transform: low_threshold = 10, high_threshold = 150
 
-![alt text][image1]
+![alt text][image5]
 
-![alt text][image1]
+![alt text][image6]
 
 I am happy with HLS
 
-3- I used `region_of_interest` function with the bounding box:
+**3-** I used `region_of_interest` function with the bounding box:
 ```python
 def get_vertices(image):
     imshape = image.shape
     return np.array([[(120,imshape[0]),(420, 330), (imshape[1] - 420, 330), (imshape[1]-50,imshape[0])]], dtype=np.int32)
 ```
 
-![alt text][image1]
+![alt text][image7]
 
-4- I called the `cv2.HoughLinesP` to detect the lines
+**4-** I called the `cv2.HoughLinesP` to detect the lines
 
-5- I modified the function `draw_lines`:
+**5-** I modified the function `draw_lines`:
 - Calculate the slope of the line to determine if it belongs to the right / left line: `slope = (y2-y1)/(x2-x1)`
 - I used `left_z = np.polyfit(left_x, left_y, 1)` and `left_f = np.poly1d(left_z)` to fit all detected point in one line
 - `cv2.line(image, (left_f(imshape[0]).astype(int), imshape[0]), (left_f(half_y).astype(int), half_y), color, thickness)`: this line draw a left line from the bottom left to the half-image point using the polyfit found above
 
-![alt text][image1]
+![alt text][image8]
 
-6- The function `process_image` is the final pipeline to find the lane lines
+**6-** The function `process_image` is the final pipeline to find the lane lines
 
+Here is the link to result [solidWhiteRight](./test_videos_output/solidWhiteRight.mp4), [solidYellowLeft](./test_videos_output/solidYellowLeft.mp4) and the [challenge](./test_videos_output/challenge.mp4)
 
 ### 2. Identify potential shortcomings with your current pipeline
-
 
 - The solidWhiteRight video looks fine but solidYellowLeft at 11-12 second the lines flash with wrong detection, this is a sign that the HoughLinesP parameters need to be tuned up
 
