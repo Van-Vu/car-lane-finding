@@ -21,7 +21,7 @@ The goals / steps of this project are the following:
 
 ### Reflection
 
-### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
+### 1. The pipeline
 
 Since the lane lines consist of one white line and one yellow line. My first step is to detect those 2 lines at the same time
 
@@ -71,7 +71,7 @@ def get_vertices(image):
 
 Here is the link to result [solidWhiteRight](./test_videos_output/solidWhiteRight.mp4), [solidYellowLeft](./test_videos_output/solidYellowLeft.mp4) and the [challenge](./test_videos_output/challenge.mp4)
 
-### 2. Identify potential shortcomings with your current pipeline
+### 2. Identify potential shortcomings with the current pipeline
 
 - The solidWhiteRight video looks fine but solidYellowLeft at 11-12 second the lines flash with wrong detection, this is a sign that the HoughLinesP parameters need to be tuned up
 
@@ -80,7 +80,7 @@ Here is the link to result [solidWhiteRight](./test_videos_output/solidWhiteRigh
 - Can't detect curve lane-line since there's no way for me to draw a curve line at this point
 
 
-### 3. Suggest possible improvements to your pipeline
+### 3. Suggest possible improvements to the pipeline
 
 - Extract the images in the period of 11-12 second in solidYellowLeft and fine-tune the HoughLinesP parameters
 
